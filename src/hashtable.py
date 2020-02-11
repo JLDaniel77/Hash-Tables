@@ -105,7 +105,8 @@ class HashTable:
         while current:
             if current.key == key:
                 return current.value
-            current = current.next
+            else:
+                current = current.next
         return None
 
     def resize(self):
