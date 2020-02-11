@@ -115,15 +115,16 @@ class HashTable:
 
         Fill this in.
         '''
+        old_storage = self.storage
         self.capacity *= 2
-        new_storage = HashTable(self.capacity)
+        self.storage = [None] * self.capacity
+        current = None
 
-        for item in self.storage:
-            current = item
+        for i in old_storage:
+            current = i
             while current:
-                new_storage.insert(current.key, current.value)
+                self.insert(current.key, current.value)
                 current = current.next
-        self.storage = new_storage.storage
 
 
 if __name__ == "__main__":
