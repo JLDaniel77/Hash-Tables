@@ -60,7 +60,7 @@ class HashTable:
 
         # Check if current location is empty
         # Handle collisions by adding new LinkedPair
-        while current is not None and current.key is not key:
+        while current and current.key != key:
             last = current
             current = last.next
         new = LinkedPair(key, value)
@@ -76,17 +76,21 @@ class HashTable:
         Fill this in.
         '''
         index = self._hash_mod(key)
+        last = None
         current = self.storage[index]
         while current and current.key != key:
-            prev = current
-            current = prev.next
-        if current is None:
-            print("WARNING: key to remove not found")
+            last = current
+            current = current.next
+        # If key isn't found
+        if self.storage[index] is None:
+            print("Key could not be found.")
+        # If key is found
         else:
-            if prev is None:
+            # Remove the first element in the linked list
+            if last is None:
                 self.storage[index] = current.next
             else:
-                prev.next = current.next
+                last.next = current.next
 
     def retrieve(self, key):
         '''
