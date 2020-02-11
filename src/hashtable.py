@@ -63,9 +63,14 @@ class HashTable:
         while current and current.key != key:
             last = current
             current = last.next
-        new = LinkedPair(key, value)
-        new.next = self.storage[index]
-        self.storage[index] = new
+        # If a node is found with same key
+        if current:
+            current.value = value
+        # If a node is not found
+        else:
+            new = LinkedPair(key, value)
+            new.next = self.storage[index]
+            self.storage[index] = new
 
     def remove(self, key):
         '''
